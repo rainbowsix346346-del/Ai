@@ -1,0 +1,128 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-sans: 'Vazirmatn', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+    --bg-obsidian: #0a0c0f;
+    --bg-console: #12151b;
+    --bg-panel: #171b23;
+    --border-hairline: rgba(234, 230, 223, 0.09);
+    --text-primary: #eae6df;
+    --text-muted: #9b968e;
+    --accent-amber: #d9943a;
+    --accent-crimson: #c83e37;
+    --accent-emerald: #2e8b6e;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+    font-family: var(--font-sans);
+    background-color: var(--bg-obsidian);
+    color: var(--text-primary);
+    direction: rtl;
+    overflow-x: hidden;
+  }
+}
+
+.font-numeric {
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+}
+
+.font-console-mono {
+  font-family: var(--font-mono), var(--font-sans);
+  font-variant-numeric: tabular-nums;
+}
+
+.scanlines {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.025) 0px,
+    rgba(255, 255, 255, 0.025) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+.vignette-overlay {
+  background: radial-gradient(
+    ellipse at center,
+    transparent 45%,
+    rgba(5, 6, 8, 0.78) 100%
+  );
+}
+
+.tension-vignette {
+  background: radial-gradient(
+    ellipse at center,
+    transparent 40%,
+    rgba(160, 26, 22, 0.42) 100%
+  );
+}
+
+@keyframes subtleFlicker {
+  0%, 100% {
+    opacity: 1;
+  }
+  48% {
+    opacity: 0.96;
+  }
+  50% {
+    opacity: 0.78;
+  }
+  52% {
+    opacity: 0.99;
+  }
+}
+
+@keyframes ringShake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-2px);
+  }
+  40% {
+    transform: translateX(2px);
+  }
+  60% {
+    transform: translateX(-1.5px);
+  }
+  80% {
+    transform: translateX(1.5px);
+  }
+}
+
+.animate-subtle-flicker {
+  animation: subtleFlicker 7s infinite;
+}
+
+.animate-ring-shake {
+  animation: ringShake 0.45s ease-in-out infinite;
+}
+
+/* Custom slim dark scrollbars for console panels */
+.console-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.console-scroll::-webkit-scrollbar-track {
+  background: rgba(10, 12, 15, 0.5);
+}
+.console-scroll::-webkit-scrollbar-thumb {
+  background: rgba(234, 230, 223, 0.16);
+  border-radius: 3px;
+}
+.console-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(217, 148, 58, 0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-subtle-flicker,
+  .animate-ring-shake {
+    animation: none !important;
+  }
+}
